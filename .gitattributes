@@ -1,0 +1,6 @@
+# Ignore tous les fichiers HTML dans tous les dossiers et sous-dossiers
+**/*.html linguist-detectable=false
+
+# Si tu as aussi des jeux de données volumineux (CSV, JSON, etc.) à masquer des stats :
+**/*.csv linguist-detectable=false
+**/*.json linguist-detectable=false
