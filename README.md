@@ -1,60 +1,22 @@
-# Lab 5 – Machine Learning Challenge: Air Quality Prediction
+# Machine Learning TD — S7
 
-EFREI – Lab 5 (Malika Charrad)
+This repository contains the practical lab assignments completed as part of a Machine Learning course during semester 7. It covers the fundamentals of supervised learning through four hands-on labs, from simple linear regression to neural networks.
 
-## Goal
+## Labs Overview
 
-Predict air quality from pollutant sub-indexes, using the `global_air_pollution.xlsx` dataset (23,463 rows × 12 columns):
+- **LAB 1 — Linear Regression**: Simple and multiple linear regression, gradient descent, and error metrics such as MSE, RMSE and R-squared.
+- **LAB 2 — Logistic Regression & KNN**: Binary and multiclass logistic regression, k-Nearest Neighbors, and evaluation metrics including confusion matrix, precision, recall and F1-score.
+- **LAB 3 — Decision Tree & Random Forest**: Decision trees using Gini impurity and entropy, ensemble methods, bagging, and feature importance, applied to the Wisconsin Breast Cancer dataset.
+- **LAB 4 — Multilayer Perceptron**: Neural network classification approached two ways: first with scikit-learn, then with a Keras implementation using TensorFlow.
 
-- **Regression**: predict the numeric `AQI Value`.
-- **Classification**: predict the `AQI Category` (Good, Moderate, Unhealthy for Sensitive Groups, Unhealthy, Very Unhealthy, Hazardous).
+## Tech Stack
 
-## Project structure
+- Python 3
+- numpy and pandas for data manipulation
+- matplotlib and seaborn for visualization
+- scikit-learn for classical machine learning models
+- TensorFlow and Keras for the neural network implementation in Lab 4
 
-The notebook is organized in the same order as the assignment:
+## Notes
 
-1. **Part 1 – Preprocessing**: data understanding, cleaning, encoding, feature selection, train/test split, normalization.
-2. **Part 2 – Regression**: Linear Regression, Decision Tree Regressor, Random Forest Regressor.
-3. **Part 3 – Classification**: Logistic Regression, Decision Tree, Random Forest, Perceptron, MLP Classifier.
-4. **Conclusion**: comparison of all models, strengths and limitations, effect of complexity, recommendations.
-
-## Setup
-
-- Python environment: conda environment `ml_tp`
-- Libraries: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `openpyxl`
-
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn openpyxl
-```
-
-Place `global_air_pollution.xlsx` in the same folder as the notebook, then run all cells from top to bottom.
-
-## Main choices
-
-- **Features (4)**: `CO AQI Value`, `Ozone AQI Value`, `NO2 AQI Value`, `PM2.5 AQI Value`.
-- `AQI Value` is excluded from the classification features (data leakage: the category is derived from it).
-- **Missing values**: only in `Country` and `City`, replaced by `"Unknown"` (these columns are not used as predictors).
-- **Outliers**: kept, since they are real measurements of very polluted cities and are needed to learn the rare classes.
-- **Target encoding**: ordinal, following severity (Good = 0 … Hazardous = 5).
-- **Split**: 80/20, stratified on `AQI Category`, `random_state=42`.
-- **Normalization**: `StandardScaler` fitted on the train set only. Used for Linear/Logistic Regression, Perceptron and MLP. Trees and forests use the original values.
-
-## Main results (test set)
-
-| Task | Best model | Results |
-|---|---|---|
-| Regression | Random Forest | R² = 0.998, RMSE = 2.58, MAE = 0.22 |
-| Classification | Decision Tree / Random Forest | Accuracy ≈ 0.999, macro-F1 ≈ 0.99 |
-
-Other findings:
-
-- Tree-based models clearly beat linear models: the AQI is the maximum of the sub-indexes and the categories follow fixed thresholds (50, 100, 150, ...).
-- The Perceptron is the worst model (macro-F1 = 0.46); the MLP with two hidden layers reaches macro-F1 = 0.97.
-- No harmful overfitting: the limiting factor was bias, not variance.
-- Weak points: AQI > 300 and the rare classes `Very Unhealthy` and `Hazardous`.
-
-## Limitations
-
-- The target is almost a deterministic function of the input sub-indexes, so these scores do not represent real air quality forecasting.
-- Only one split and one random seed were tested (no cross-validation).
-- Some inconsistencies between values and categories were observed in the data but not corrected.
+Large files such as datasets, CSV exports and HTML reports are excluded from this repository via `.gitignore` to keep it lightweight. Each lab folder includes the assignment instructions and the corresponding Jupyter notebook.
